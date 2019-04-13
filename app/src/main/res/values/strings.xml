@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyHome</string>
+    <string name="action_settings">Settings</string>
+    <string name="device_image">Device Image</string>
+    <string name="Device_Value">Device Value</string>
+    <string name="Device_Name">Device Name</string>
+    <string name="Device_Class">Device Class</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+</resources>

@@ -11,7 +11,7 @@
         android:layout_margin="4dp"
         android:background="@drawable/squre_border"
         android:contentDescription="@string/Device_Image"
-        android:padding="4dp"
+        android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_lightbulb" />
@@ -23,6 +23,7 @@
         android:layout_margin="4dp"
         android:padding="4dp"
         android:text="@string/Device_Name"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/DeviceImage"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +34,6 @@
         android:layout_margin="4dp"
         android:padding="4dp"
         android:text="@string/Device_Address"
-        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/DeviceImage"
         app:layout_constraintTop_toBottomOf="@+id/DeviceNameControl" />
 
@@ -44,7 +44,6 @@
         android:layout_margin="4dp"
         android:padding="4dp"
         android:text="@string/Device_Bonded"
-        android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/DeviceImage"
         app:layout_constraintTop_toBottomOf="@+id/DeviceAddressControl" />
 
@@ -53,21 +52,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:padding="4dp"
         android:text="@string/Device_Type"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/DeviceImage"
-        app:layout_constraintTop_toBottomOf="@+id/DeviceBondedControl" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceImage" />
 
     <TextView
         android:id="@+id/DeviceMajorClassControl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:layout_marginStart="8dp"
         android:padding="4dp"
         android:text="@string/Device_Major_Class"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/DeviceImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DeviceTypeControl" />
 
     <TextView
@@ -75,10 +75,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:layout_marginStart="8dp"
         android:padding="4dp"
         android:text="@string/Device_Class"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/DeviceBondedControl"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DeviceMajorClassControl" />
 
 

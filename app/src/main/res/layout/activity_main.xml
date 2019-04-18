@@ -6,15 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <include layout="@layout/content_main" />
+    <FrameLayout
+        android:id="@+id/contentFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_anchorGravity="end|top"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="top|start"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:layout_anchor="@+id/contentFragment"
+        app:layout_anchorGravity="end|bottom"
+        app:srcCompat="@drawable/ic_add" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="90dp"
+        android:tooltipText="@string/Menu_Item_settings"
+        android:visibility="invisible"
+        app:layout_anchor="@+id/contentFragment"
+        app:layout_anchorGravity="end|bottom"
+        app:srcCompat="@drawable/ic_settings" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_devices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="160dp"
+        android:tooltipText="@string/Menu_Item_devices"
+        android:visibility="invisible"
+        app:layout_anchor="@+id/contentFragment"
+        app:layout_anchorGravity="end|bottom"
+        app:srcCompat="@drawable/ic_devices" />
 
 </android.support.design.widget.CoordinatorLayout>

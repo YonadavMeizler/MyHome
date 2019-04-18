@@ -12,6 +12,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.imq.myhome.Auxiliary.AuxiliaryBluetooth;
+import com.imq.myhome.Interfaces.DeviceEditListener;
 import com.imq.myhome.Objects.Device;
 import com.imq.myhome.R;
 
@@ -21,10 +23,17 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
     private static final String TAG = "myHome";
     private ArrayList<Device> mDevice;
     private Context mContext;
+    private DeviceEditListener Edit_Click;
+    private AuxiliaryBluetooth AuxB = new AuxiliaryBluetooth();
 
     public AdapterDevice(Context c, ArrayList<Device> devices) {
         mContext = c;
         mDevice = devices;
+
+    }
+
+    public void setOnEditDeviceListener(DeviceEditListener onEditDeviceClick) {
+        this.Edit_Click = onEditDeviceClick;
     }
 
     @NonNull
@@ -38,9 +47,8 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         viewHolder.Device_image.setImageResource((mDevice.get(i).getDevice_Image()));
         viewHolder.Device_image.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        viewHolder.Device_class.setText(String.format("Class: %s", mDevice.get(i).getDevice_Class()));
-        viewHolder.Device_value.setText(String.valueOf(mDevice.get(i).getDevice_Value()));
         viewHolder.Device_name.setText(mDevice.get(i).getDevice_Name());
+        viewHolder.Device_class.setText(AuxB.getDevice_Class(mDevice.get(i).getDevice_Class()));
 
         viewHolder.Device_actions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +63,12 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
                             case R.id.device_edit:
 
                                 //Or Some other code you want to put here.. This is just an example.
-                                Toast.makeText(mContext, "Edit device " + " : " + i, Toast.LENGTH_LONG).show();
+
+                                if (Edit_Click != null) {
+                                    Edit_Click.onEditClick(i, mDevice.get(i));
+                                } else {
+                                    Toast.makeText(mContext, "Control device " + " : " + i, Toast.LENGTH_LONG).show();
+                                }
 
                                 break;
                             case R.id.device_delete:
@@ -83,17 +96,16 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView Device_name, Device_value, Device_class;
+        private TextView Device_name, Device_class;
         private ImageView Device_image, Device_actions;
 
         ViewHolder(View view) {
             super(view);
-            Device_image = view.findViewById(R.id.DeviceImage);
-            Device_actions = view.findViewById(R.id.DeviceActions);
+            Device_image = view.findViewById(R.id.DeviceItemImage);
+            Device_actions = view.findViewById(R.id.DeviceItemActions);
 
-            Device_class = view.findViewById(R.id.DeviceClass);
-            Device_value = view.findViewById(R.id.DeviceValue);
-            Device_name = view.findViewById(R.id.DeviceName);
+            Device_name = view.findViewById(R.id.DeviceItemName);
+            Device_class = view.findViewById(R.id.DeviceItemClass);
 
         }
     }

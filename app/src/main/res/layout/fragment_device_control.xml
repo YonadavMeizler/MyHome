@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/DeviceImage"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/squre_border"
+        android:contentDescription="@string/Device_Image"
+        android:padding="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_lightbulb" />
+
+    <TextView
+        android:id="@+id/DeviceNameControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/Device_Name"
+        app:layout_constraintStart_toEndOf="@+id/DeviceImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/DeviceAddressControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/Device_Address"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/DeviceImage"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceNameControl" />
+
+    <TextView
+        android:id="@+id/DeviceBondedControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/Device_Bonded"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/DeviceImage"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceAddressControl" />
+
+    <TextView
+        android:id="@+id/DeviceTypeControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/Device_Type"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/DeviceImage"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceBondedControl" />
+
+    <TextView
+        android:id="@+id/DeviceMajorClassControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/Device_Major_Class"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/DeviceImage"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceTypeControl" />
+
+    <TextView
+        android:id="@+id/DeviceClassControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:text="@string/Device_Class"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/DeviceBondedControl"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceMajorClassControl" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -7,6 +7,9 @@ import android.os.Parcelable;
 import com.imq.myhome.R;
 
 public class Device implements Parcelable {
+
+    private static final String TAG = "R2Y2";
+
     private String Device_Name;
     public static final Creator<Device> CREATOR = new Creator<Device>() {
         @Override

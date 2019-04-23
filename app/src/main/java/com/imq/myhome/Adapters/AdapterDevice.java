@@ -2,6 +2,7 @@ package com.imq.myhome.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,7 +21,7 @@ import com.imq.myhome.R;
 import java.util.ArrayList;
 
 public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder> {
-    private static final String TAG = "myHome";
+    private static final String TAG = "R2Y2";
     private ArrayList<Device> mDevice;
     private Context mContext;
     private DeviceEditListener Edit_Click;
@@ -49,6 +50,16 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
         viewHolder.Device_image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         viewHolder.Device_name.setText(mDevice.get(i).getDevice_Name());
         viewHolder.Device_class.setText(AuxB.getDevice_Class(mDevice.get(i).getDevice_Class()));
+        viewHolder.Device_bond_status.setText(AuxB.getDevice_BondState(mDevice.get(i).getDevice_BondState()));
+
+        viewHolder.Device_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Edit_Click != null) {
+                    Edit_Click.onEditClick(i, mDevice.get(i));
+                }
+            }
+        });
 
         viewHolder.Device_actions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,22 +72,11 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.device_edit:
-
-                                //Or Some other code you want to put here.. This is just an example.
-
-                                if (Edit_Click != null) {
-                                    Edit_Click.onEditClick(i, mDevice.get(i));
-                                } else {
-                                    Toast.makeText(mContext, "Control device " + " : " + i, Toast.LENGTH_LONG).show();
-                                }
-
+                                Toast.makeText(mContext, "Edit device " + " : " + i, Toast.LENGTH_LONG).show();
                                 break;
                             case R.id.device_delete:
-
-                                Toast.makeText(mContext, "delete device " + " : " + i, Toast.LENGTH_LONG).show();
-
+                                Toast.makeText(mContext, "Delete device " + " : " + i, Toast.LENGTH_LONG).show();
                                 break;
-
                             default:
                                 break;
                         }
@@ -96,8 +96,9 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView Device_name, Device_class;
+        private TextView Device_name, Device_class, Device_bond_status;
         private ImageView Device_image, Device_actions;
+        private ConstraintLayout Device_layout;
 
         ViewHolder(View view) {
             super(view);
@@ -106,7 +107,9 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
 
             Device_name = view.findViewById(R.id.DeviceItemName);
             Device_class = view.findViewById(R.id.DeviceItemClass);
+            Device_bond_status = view.findViewById(R.id.DeviceItemBondStatus);
 
+            Device_layout = view.findViewById(R.id.DeviceItemLayout);
         }
     }
 }

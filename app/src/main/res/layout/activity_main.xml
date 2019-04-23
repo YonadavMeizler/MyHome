@@ -50,4 +50,30 @@
         app:layout_anchorGravity="end|bottom"
         app:srcCompat="@drawable/ic_devices" />
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_enable_disable_bluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="230dp"
+        android:tooltipText="@string/Menu_Item_Enable_Disable_Bluetooth"
+        android:visibility="invisible"
+        app:layout_anchor="@+id/contentFragment"
+        app:layout_anchorGravity="end|bottom"
+        app:srcCompat="@drawable/ic_bluetooth" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_discover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="300dp"
+        android:tooltipText="@string/Menu_Item_scan_devices"
+        android:visibility="invisible"
+        app:layout_anchor="@+id/contentFragment"
+        app:layout_anchorGravity="end|bottom"
+        app:srcCompat="@drawable/ic_bluetooth_searching" />
 </android.support.design.widget.CoordinatorLayout>

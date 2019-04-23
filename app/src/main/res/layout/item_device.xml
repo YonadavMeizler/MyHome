@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/DeviceItemLayout"
     android:layout_margin="4dp">
 
     <ImageView
@@ -50,4 +51,17 @@
         android:text="@string/Device_Class"
         app:layout_constraintStart_toEndOf="@+id/DeviceItemImage"
         app:layout_constraintTop_toBottomOf="@+id/DeviceItemName" />
+
+
+    <TextView
+        android:id="@+id/DeviceItemBondStatus"
+        style="@style/ROBOTO_Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        android:text="@string/Device_Bonded"
+        app:layout_constraintStart_toEndOf="@+id/DeviceItemImage"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceItemClass" />
 </android.support.constraint.ConstraintLayout>

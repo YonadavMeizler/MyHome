@@ -1,11 +1,15 @@
 package com.imq.myhome.Auxiliary;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.util.Log;
 
 import com.imq.myhome.R;
 
 public class AuxiliaryBluetooth {
+
+    private static final String TAG = "R2Y2";
 
     public AuxiliaryBluetooth() {
     }
@@ -412,5 +416,52 @@ public class AuxiliaryBluetooth {
                 break;
         }
         return MajorClass;
+    }
+
+    public void get_state(int state) {
+        switch (state) {
+            case BluetoothAdapter.STATE_OFF:
+                Log.d(TAG, "STATE OFF");
+                break;
+            case BluetoothAdapter.STATE_TURNING_OFF:
+                Log.d(TAG, "STATE TURNING OFF");
+                break;
+            case BluetoothAdapter.STATE_ON:
+                Log.d(TAG, "STATE ON");
+                break;
+            case BluetoothAdapter.STATE_TURNING_ON:
+                Log.d(TAG, "STATE TURNING ON");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void get_scan_mode(int state) {
+        switch (state) {
+            case BluetoothAdapter.SCAN_MODE_CONNECTABLE:
+                Log.d(TAG, "Discoverability Enable, Able to receive connections.");
+                break;
+            case BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE:
+                Log.d(TAG, "Discoverability disable, Able to receive connections.");
+                break;
+            case BluetoothAdapter.SCAN_MODE_NONE:
+                Log.d(TAG, "Discoverability disable, Not able to receive connections.");
+                break;
+            case BluetoothAdapter.STATE_CONNECTED:
+                Log.d(TAG, "connected.");
+                break;
+            case BluetoothAdapter.STATE_CONNECTING:
+                Log.d(TAG, "Connecting...");
+                break;
+            case BluetoothAdapter.STATE_DISCONNECTED:
+                Log.d(TAG, "Disconnected.");
+                break;
+            case BluetoothAdapter.STATE_DISCONNECTING:
+                Log.d(TAG, "Disconnecting...");
+                break;
+            default:
+                break;
+        }
     }
 }

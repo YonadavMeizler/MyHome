@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,10 @@ import android.widget.TextView;
 
 import com.imq.myhome.Auxiliary.AuxiliaryBluetooth;
 import com.imq.myhome.R;
+import com.imq.myhome.Services.ServiceBluetooth;
 
+import java.lang.reflect.Method;
+import java.nio.charset.Charset;
 import java.util.Objects;
 
 public class FragmentDeviceInfo extends Fragment implements View.OnClickListener {
@@ -30,6 +34,7 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private TextView Console_output, BlueBonded;
     private BluetoothDevice mDevice;
+    private ServiceBluetooth mBluetoothConnection;
 
     private AuxiliaryBluetooth BTAux = new AuxiliaryBluetooth();
 
@@ -83,7 +88,7 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
         TextView BlueMajorClass = v.findViewById(R.id.DeviceMajorClassControl);
         ImageView BlueImage = v.findViewById(R.id.DeviceImage);
         Button BlueButton1 = v.findViewById(R.id.DeviceButtonPair);
-        Button BlueButton2 = v.findViewById(R.id.DeviceButton2);
+        Button BlueButton2 = v.findViewById(R.id.DeviceButtonUnPair);
         Button BlueButton3 = v.findViewById(R.id.DeviceButton3);
         Console_output = v.findViewById(R.id.DeviceConsole);
 
@@ -106,17 +111,29 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.DeviceButtonPair:
-                Console_output.append("\r\nPairing device");
+                Console_output.append("\r\nPair device");
                 // Check that we're actually connected before trying anything
                 bluetoothAdapter.cancelDiscovery();
                 mDevice.createBond();
 
                 break;
-            case R.id.DeviceButton2:
-                Console_output.append("\r\nButton 2 pressed");
+            case R.id.DeviceButtonUnPair:
+                Console_output.append("\r\nUnpair device");
+                bluetoothAdapter.cancelDiscovery();
+                try {
+                    Method m = mDevice.getClass().getMethod("removeBond", (Class[]) null);
+                    m.invoke(mDevice, (Object[]) null);
+                } catch (Exception e) {
+                    Log.d(TAG, e.getMessage());
+                }
                 break;
             case R.id.DeviceButton3:
                 Console_output.append("\r\nButton 3 pressed");
+                String Text = "hello";
+                byte[] bytes = Text.getBytes(Charset.defaultCharset());
+
+                StringBuilder SB = new StringBuilder();
+
                 break;
             default:
                 break;

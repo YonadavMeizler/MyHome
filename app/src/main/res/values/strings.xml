@@ -21,7 +21,9 @@
     <string name="Menu_Item_Enable_Disable_Bluetooth">Enable/Disable Bluetooth</string>
     <string name="bluetoothaction3">Action 3</string>
     <string name="bluetoothaction1">Pair device</string>
-    <string name="bluetoothaction2">Action 2</string>
+    <string name="bluetoothaction2">Unpair device</string>
     <string name="bluetooth_device_console_output">Bluetooth Device Console Output</string>
+    <string name="pair">Pair</string>
+    <string name="unpair">Un-Pair</string>
 
 </resources>

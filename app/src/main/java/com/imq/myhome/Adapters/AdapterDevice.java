@@ -1,10 +1,12 @@
 package com.imq.myhome.Adapters;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,12 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.imq.myhome.Auxiliary.AuxiliaryBluetooth;
 import com.imq.myhome.Interfaces.DeviceEditListener;
 import com.imq.myhome.R;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder> {
@@ -26,6 +28,7 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
     private Context mContext;
     private DeviceEditListener Edit_Click;
     private AuxiliaryBluetooth AuxB = new AuxiliaryBluetooth();
+    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
     public AdapterDevice(Context c, ArrayList<BluetoothDevice> devices) {
         mContext = c;
@@ -45,13 +48,12 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         viewHolder.Device_image.setImageResource(AuxB.getDevice_image(mDevices.get(i)));
         viewHolder.Device_image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         viewHolder.Device_name.setText(mDevices.get(i).getName());
         viewHolder.Device_class.setText(AuxB.getDevice_Class(mDevices.get(i)));
         viewHolder.Device_bond_status.setText(AuxB.getDevice_BondState(mDevices.get(i)));
-
         viewHolder.Device_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,11 +73,20 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.device_edit:
-                                Toast.makeText(mContext, "Edit device " + " : " + i, Toast.LENGTH_LONG).show();
+                            case R.id.device_pair:
+                                bluetoothAdapter.cancelDiscovery();
+                                mDevices.get(i).createBond();
+                                viewHolder.Device_bond_status.setText(AuxB.getDevice_BondState(mDevices.get(i)));
                                 break;
-                            case R.id.device_delete:
-                                Toast.makeText(mContext, "Delete device " + " : " + i, Toast.LENGTH_LONG).show();
+                            case R.id.device_unpair:
+                                bluetoothAdapter.cancelDiscovery();
+                                try {
+                                    Method m = mDevices.get(i).getClass().getMethod("removeBond", (Class[]) null);
+                                    m.invoke(mDevices.get(i), (Object[]) null);
+                                } catch (Exception e) {
+                                    Log.d(TAG, e.getMessage());
+                                }
+                                viewHolder.Device_bond_status.setText(AuxB.getDevice_BondState(mDevices.get(i)));
                                 break;
                             default:
                                 break;

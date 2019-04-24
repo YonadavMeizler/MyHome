@@ -18,17 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/DeviceItemName" />
 
-    <TextView
-        android:id="@+id/DeviceItemName"
-        style="@style/ROBOTO_Regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:padding="4dp"
-        android:text="@string/Device_Name"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/DeviceItemImage"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/DeviceItemActions"
@@ -41,16 +30,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
-        android:id="@+id/DeviceItemClass"
+        android:id="@+id/DeviceItemName"
         style="@style/ROBOTO_Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:padding="4dp"
+        android:text="@string/Device_Name"
+        android:textSize="16sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/DeviceItemActions"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/DeviceItemImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="wrap" />
+
+    <TextView
+        android:id="@+id/DeviceItemClass"
+        style="@style/ROBOTO_Regular"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
         android:padding="4dp"
         android:text="@string/Device_Class"
+        app:layout_constrainedWidth="true"
         app:layout_constraintStart_toEndOf="@+id/DeviceItemImage"
-        app:layout_constraintTop_toBottomOf="@+id/DeviceItemName" />
+        app:layout_constraintEnd_toStartOf="@+id/DeviceItemActions"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceItemName"
+        app:layout_constraintWidth_default="wrap" />
 
 
     <TextView
@@ -59,9 +75,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
         android:padding="4dp"
+        android:ellipsize="end"
         android:text="@string/Device_Bonded"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/DeviceItemActions"
         app:layout_constraintStart_toEndOf="@+id/DeviceItemImage"
-        app:layout_constraintTop_toBottomOf="@+id/DeviceItemClass" />
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceItemClass"
+        app:layout_constraintWidth_default="wrap" />
+
 </android.support.constraint.ConstraintLayout>

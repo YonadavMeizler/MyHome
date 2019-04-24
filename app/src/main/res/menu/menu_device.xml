@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/device_edit"
-        android:title="@string/edit" />
+        android:id="@+id/device_pair"
+        android:title="@string/pair" />
     <item
-        android:id="@+id/device_delete"
-        android:title="@string/delete" />
+        android:id="@+id/device_unpair"
+        android:title="@string/unpair" />
 </menu>

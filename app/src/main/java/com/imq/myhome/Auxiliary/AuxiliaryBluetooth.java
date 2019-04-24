@@ -14,7 +14,8 @@ public class AuxiliaryBluetooth {
     public AuxiliaryBluetooth() {
     }
 
-    public String getDevice_BondState(Integer bondstate) {
+    public String getDevice_BondState(BluetoothDevice device) {
+        int bondstate = device.getBondState();
         String BondStateString = "";
         switch (bondstate) {
             case BluetoothDevice.BOND_BONDED:
@@ -29,10 +30,12 @@ public class AuxiliaryBluetooth {
             default:
                 break;
         }
+        Log.d(TAG, "Device Bond state: " + BondStateString);
         return BondStateString;
     }
 
-    public String getDevice_Type(Integer bondtype) {
+    public String getDevice_Type(BluetoothDevice device) {
+        int bondtype = device.getType();
         String TypeString = "";
         switch (bondtype) {
             case BluetoothDevice.DEVICE_TYPE_CLASSIC:
@@ -50,12 +53,14 @@ public class AuxiliaryBluetooth {
             default:
                 break;
         }
+        Log.d(TAG, "Device Type: " + TypeString);
         return TypeString;
     }
 
-    public int getDevice_image(BluetoothClass deviceclass) {
-        int Image_res = R.drawable.ic_lightbulb;
-        switch (deviceclass.getDeviceClass()) {
+    public int getDevice_image(BluetoothDevice device) {
+        BluetoothClass device_class = device.getBluetoothClass();
+        int Image_res;
+        switch (device_class.getDeviceClass()) {
 
             case BluetoothClass.Device.AUDIO_VIDEO_CAMCORDER:
                 Image_res = R.drawable.ic_camera;
@@ -208,15 +213,16 @@ public class AuxiliaryBluetooth {
                 Image_res = R.drawable.ic_watch;
                 break;
             default:
+                Image_res = R.drawable.ic_lightbulb;
                 break;
         }
         return Image_res;
     }
 
-    public String getDevice_Class(BluetoothClass deviceclass) {
+    public String getDevice_Class(BluetoothDevice device) {
+        BluetoothClass device_class = device.getBluetoothClass();
         String ClassString;
-        switch (deviceclass.getDeviceClass()) {
-
+        switch (device_class.getDeviceClass()) {
             case BluetoothClass.Device.AUDIO_VIDEO_CAMCORDER:
                 ClassString = "AUDIO VIDEO CAMCORDER";
                 break;
@@ -371,13 +377,15 @@ public class AuxiliaryBluetooth {
                 ClassString = "UNCATEGORIZED";
                 break;
         }
+        Log.d(TAG, "Device Class: " + ClassString);
         return ClassString;
     }
 
 
-    public String getDevice_MajorClass(BluetoothClass deviceclass) {
+    public String getDevice_MajorClass(BluetoothDevice device) {
+        int Majorclass = device.getBluetoothClass().getMajorDeviceClass();
         String MajorClass;
-        switch (deviceclass.getMajorDeviceClass()) {
+        switch (Majorclass) {
             case BluetoothClass.Device.Major.AUDIO_VIDEO:
                 MajorClass = "AUDIO VIDEO";
                 break;
@@ -415,6 +423,7 @@ public class AuxiliaryBluetooth {
                 MajorClass = "UNCATEGORIZED";
                 break;
         }
+        Log.d(TAG, "Device Major Class: " + MajorClass);
         return MajorClass;
     }
 

@@ -2,7 +2,6 @@ package com.imq.myhome.Fragments;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,7 +21,6 @@ import com.imq.myhome.Adapters.AdapterDevice;
 import com.imq.myhome.Auxiliary.AuxiliaryBluetooth;
 import com.imq.myhome.Interfaces.DeviceEditListener;
 import com.imq.myhome.Interfaces.FragmentListener;
-import com.imq.myhome.Objects.Device;
 import com.imq.myhome.R;
 
 import java.util.ArrayList;
@@ -37,22 +35,14 @@ public class FragmentDevicesList extends Fragment implements DeviceEditListener 
     private AdapterDevice adapter;
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private AuxiliaryBluetooth AUXBlue = new AuxiliaryBluetooth();
-    private ArrayList<Device> Devices = new ArrayList<>();
+    private ArrayList<BluetoothDevice> Devices = new ArrayList<>();
 
     private final BroadcastReceiver mBluetoothDiscoveringReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                BluetoothClass BClass = device.getBluetoothClass();
-                Device device1 = new Device();
-                device1.setDevice_Name(device.getName());
-                device1.setDevice_Class(BClass);
-                device1.setDevice_Address(device.getAddress());
-                device1.setDevice_Type(device.getType());
-                device1.setDevice_BondState(device.getBondState());
-                device1.setDevice_Image(AUXBlue.getDevice_image(BClass));
-                Devices.add(device1);
+                Devices.add(device);
                 if (adapter != null) {
                     adapter.notifyDataSetChanged();
                 }
@@ -110,15 +100,7 @@ public class FragmentDevicesList extends Fragment implements DeviceEditListener 
             if (pairedDevices.size() > 0) {
                 // There are paired devices. Get the name and address of each paired device.
                 for (BluetoothDevice device : pairedDevices) {
-                    BluetoothClass BClass = device.getBluetoothClass();
-                    Device device1 = new Device();
-                    device1.setDevice_Name(device.getName());
-                    device1.setDevice_Class(BClass);
-                    device1.setDevice_Address(device.getAddress());
-                    device1.setDevice_Type(device.getType());
-                    device1.setDevice_BondState(device.getBondState());
-                    device1.setDevice_Image(AUXBlue.getDevice_image(BClass));
-                    Devices.add(device1);
+                    Devices.add(device);
                 }
             }
         }
@@ -146,7 +128,7 @@ public class FragmentDevicesList extends Fragment implements DeviceEditListener 
     }
 
     @Override
-    public void onEditClick(int position, Device device) {
+    public void onEditClick(int position, BluetoothDevice device) {
 
         FragmentDeviceInfo Fragment = new FragmentDeviceInfo();
         Bundle args = new Bundle();

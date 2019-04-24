@@ -1,7 +1,6 @@
 package com.imq.myhome;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,22 +26,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "R2Y2";
     private static final int REQUEST_ENABLE_BT = 201;
-    private final BroadcastReceiver mBluetoothDiscoveringReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                String deviceName = device.getName();
-                String deviceHardwareAddress = device.getAddress(); // MAC address
-                Log.d(TAG, "device Name: " + deviceName + " device Address: " + deviceHardwareAddress);
-            }
-        }
-    };
+
     private Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private boolean isOpen = false;
     private FloatingActionButton fab_menu, fab_settings, fab_devices, fab_enable_disable_bluetooth, fab_scan;
     private BluetoothAdapter bluetoothAdapter;
     private AuxiliaryBluetooth BTAux = new AuxiliaryBluetooth();
+
     private final BroadcastReceiver mBluetoothStateReciver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -61,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +95,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MainFragment.setOnFragmentListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, MainFragment).commit();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBluetoothStateReciver);
+        unregisterReceiver(mBluetoothScanMode);
     }
 
     @Override

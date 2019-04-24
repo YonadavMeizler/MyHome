@@ -1,8 +1,8 @@
 package com.imq.myhome.Interfaces;
 
-import com.imq.myhome.Objects.Device;
+import android.bluetooth.BluetoothDevice;
 
 public interface DeviceEditListener {
 
-    void onEditClick(int position, Device device);
+    void onEditClick(int position, BluetoothDevice device);
 }

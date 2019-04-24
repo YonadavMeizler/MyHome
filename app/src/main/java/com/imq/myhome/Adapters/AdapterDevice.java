@@ -1,5 +1,6 @@
 package com.imq.myhome.Adapters;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -15,21 +16,20 @@ import android.widget.Toast;
 
 import com.imq.myhome.Auxiliary.AuxiliaryBluetooth;
 import com.imq.myhome.Interfaces.DeviceEditListener;
-import com.imq.myhome.Objects.Device;
 import com.imq.myhome.R;
 
 import java.util.ArrayList;
 
 public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder> {
     private static final String TAG = "R2Y2";
-    private ArrayList<Device> mDevice;
+    private ArrayList<BluetoothDevice> mDevices;
     private Context mContext;
     private DeviceEditListener Edit_Click;
     private AuxiliaryBluetooth AuxB = new AuxiliaryBluetooth();
 
-    public AdapterDevice(Context c, ArrayList<Device> devices) {
+    public AdapterDevice(Context c, ArrayList<BluetoothDevice> devices) {
         mContext = c;
-        mDevice = devices;
+        mDevices = devices;
 
     }
 
@@ -46,17 +46,17 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        viewHolder.Device_image.setImageResource((mDevice.get(i).getDevice_Image()));
+        viewHolder.Device_image.setImageResource(AuxB.getDevice_image(mDevices.get(i)));
         viewHolder.Device_image.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        viewHolder.Device_name.setText(mDevice.get(i).getDevice_Name());
-        viewHolder.Device_class.setText(AuxB.getDevice_Class(mDevice.get(i).getDevice_Class()));
-        viewHolder.Device_bond_status.setText(AuxB.getDevice_BondState(mDevice.get(i).getDevice_BondState()));
+        viewHolder.Device_name.setText(mDevices.get(i).getName());
+        viewHolder.Device_class.setText(AuxB.getDevice_Class(mDevices.get(i)));
+        viewHolder.Device_bond_status.setText(AuxB.getDevice_BondState(mDevices.get(i)));
 
         viewHolder.Device_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Edit_Click != null) {
-                    Edit_Click.onEditClick(i, mDevice.get(i));
+                    Edit_Click.onEditClick(i, mDevices.get(i));
                 }
             }
         });
@@ -91,7 +91,7 @@ public class AdapterDevice extends RecyclerView.Adapter<AdapterDevice.ViewHolder
 
     @Override
     public int getItemCount() {
-        return mDevice.size();
+        return mDevices.size();
     }
 
 

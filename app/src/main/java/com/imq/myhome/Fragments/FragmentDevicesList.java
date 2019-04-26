@@ -29,8 +29,9 @@ import java.util.Set;
 
 public class FragmentDevicesList extends Fragment implements DeviceEditListener {
 
-
+    // Debugging
     private static final String TAG = "R2Y2";
+
     private static final int REQUEST_ENABLE_BT = 201;
     private AdapterDevice adapter;
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -42,9 +43,11 @@ public class FragmentDevicesList extends Fragment implements DeviceEditListener 
             String action = intent.getAction();
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                Devices.add(device);
-                if (adapter != null) {
-                    adapter.notifyDataSetChanged();
+                if (!checkDeviceInTheList(device)) {
+                    Devices.add(device);
+                    if (adapter != null) {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
         }
@@ -124,6 +127,16 @@ public class FragmentDevicesList extends Fragment implements DeviceEditListener 
         permissionCheck += getActivity().checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
         if (permissionCheck != 0) {
             this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001);
+        }
+    }
+
+    private boolean checkDeviceInTheList(BluetoothDevice DeviceToFind) {
+        if (Devices.contains(DeviceToFind)) {
+            Log.d(TAG, "device " + DeviceToFind.getName() + " is already in the list");
+            return true;
+        } else {
+            Log.d(TAG, "device " + DeviceToFind.getName() + " is not in the list");
+            return false;
         }
     }
 

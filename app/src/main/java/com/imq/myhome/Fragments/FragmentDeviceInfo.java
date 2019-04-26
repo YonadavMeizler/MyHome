@@ -7,8 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,26 +30,35 @@ import java.nio.charset.Charset;
 import java.util.Objects;
 
 public class FragmentDeviceInfo extends Fragment implements View.OnClickListener {
-
+    // Debugging
     private static final String TAG = "R2Y2";
+
     public final static String ARG_DEVICEPOSITION = "position";
     public final static String ARG_DEVICE = "device";
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private TextView Console_output, BlueBonded;
     private BluetoothDevice mDevice;
-    private ServiceBluetooth mBluetoothConnection;
-
-    private AuxiliaryBluetooth BTAux = new AuxiliaryBluetooth();
-
     private final BroadcastReceiver mBluetoothStateBond = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                String Bondstate = BTAux.getDevice_BondState(device);
-                BlueBonded.setText(Bondstate);
-                Console_output.append("\r\n" + Bondstate);
+            if (action != null) {
+                if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
+                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    String Bondstate = BTAux.getDevice_BondState(device);
+                    BlueBonded.setText(Bondstate);
+                    Console_output.append("\r\n" + Bondstate);
+                }
             }
+        }
+
+    };
+
+
+    private AuxiliaryBluetooth BTAux = new AuxiliaryBluetooth();
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            FragmentActivity activity = getActivity();
         }
     };
 
@@ -59,18 +71,22 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
     public FragmentDeviceInfo() {
     }
 
+    //private ServiceBluetooth mBluetoothConnection;
+    private ServiceBluetooth mBluetoothConnection;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_device_control, container, false);
 
         IntentFilter BTIntent = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-        getActivity().registerReceiver(mBluetoothStateBond, BTIntent);
+        Objects.requireNonNull(getActivity()).registerReceiver(mBluetoothStateBond, BTIntent);
 
         // int mDevicePosition = getArguments().getInt(ARG_DEVICEPOSITION);
         if (getArguments() != null) {
             mDevice = getArguments().getParcelable(ARG_DEVICE);
             set_view(v);
+            mBluetoothConnection = new ServiceBluetooth(mHandler);
 
         }
 
@@ -89,7 +105,8 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
         ImageView BlueImage = v.findViewById(R.id.DeviceImage);
         Button BlueButton1 = v.findViewById(R.id.DeviceButtonPair);
         Button BlueButton2 = v.findViewById(R.id.DeviceButtonUnPair);
-        Button BlueButton3 = v.findViewById(R.id.DeviceButton3);
+        Button BlueButton3 = v.findViewById(R.id.DeviceButtonConnection);
+        Button BlueButton4 = v.findViewById(R.id.DeviceButtonSendMessage);
         Console_output = v.findViewById(R.id.DeviceConsole);
 
 
@@ -105,6 +122,11 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
         BlueButton1.setOnClickListener(this);
         BlueButton2.setOnClickListener(this);
         BlueButton3.setOnClickListener(this);
+        BlueButton4.setOnClickListener(this);
+    }
+
+    private void start_bluetooth_connection() {
+        mBluetoothConnection.startClient(mDevice);
     }
 
     @Override
@@ -127,12 +149,18 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
                     Log.d(TAG, e.getMessage());
                 }
                 break;
-            case R.id.DeviceButton3:
-                Console_output.append("\r\nButton 3 pressed");
-                String Text = "hello";
+            case R.id.DeviceButtonConnection:
+                Console_output.append("\r\nStart bluetooth connection");
+                start_bluetooth_connection();
+                Console_output.append("\r\nbluetooth connection started!");
+                break;
+            case R.id.DeviceButtonSendMessage:
+                Console_output.append("\r\nSending message: B");
+                String Text = "B";
                 byte[] bytes = Text.getBytes(Charset.defaultCharset());
 
-                StringBuilder SB = new StringBuilder();
+                //tringBuilder SB = new StringBuilder();
+                mBluetoothConnection.write(bytes);
 
                 break;
             default:

@@ -106,7 +106,7 @@
         app:layout_constraintTop_toBottomOf="@+id/DeviceClassControl" />
 
     <Button
-        android:id="@+id/DeviceButton3"
+        android:id="@+id/DeviceButtonConnection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -116,6 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/DeviceButtonUnPair"
         app:layout_constraintTop_toBottomOf="@+id/DeviceClassControl" />
+
 
     <TextView
         android:id="@+id/DeviceConsole"
@@ -129,6 +130,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DeviceButtonUnPair" />
+
+    <Button
+        android:id="@+id/DeviceButtonSendMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/bluetoothaction4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DeviceConsole" />
 
 
 </android.support.constraint.ConstraintLayout>

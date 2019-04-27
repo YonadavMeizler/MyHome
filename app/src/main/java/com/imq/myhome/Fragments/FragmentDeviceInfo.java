@@ -1,5 +1,6 @@
 package com.imq.myhome.Fragments;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +38,20 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
     public final static String ARG_DEVICEPOSITION = "position";
     public final static String ARG_DEVICE = "device";
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
     private TextView Console_output, BlueBonded;
+    @SuppressLint("HandlerLeak")
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            FragmentActivity activity = getActivity();
+            if (msg.what == 1) {
+                // Update view component text, this is allowed.
+                Console_output.append("\r\n" + msg.obj);
+            }
+        }
+    };
+
     private BluetoothDevice mDevice;
     private final BroadcastReceiver mBluetoothStateBond = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -55,12 +70,7 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
 
 
     private AuxiliaryBluetooth BTAux = new AuxiliaryBluetooth();
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            FragmentActivity activity = getActivity();
-        }
-    };
+    private EditText Message;
 
     @Override
     public void onDestroy() {
@@ -102,6 +112,7 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
         TextView BlueType = v.findViewById(R.id.DeviceTypeControl);
         TextView BlueClass = v.findViewById(R.id.DeviceClassControl);
         TextView BlueMajorClass = v.findViewById(R.id.DeviceMajorClassControl);
+        Message = v.findViewById(R.id.DeviceEditTextMessage);
         ImageView BlueImage = v.findViewById(R.id.DeviceImage);
         Button BlueButton1 = v.findViewById(R.id.DeviceButtonPair);
         Button BlueButton2 = v.findViewById(R.id.DeviceButtonUnPair);
@@ -155,8 +166,9 @@ public class FragmentDeviceInfo extends Fragment implements View.OnClickListener
                 Console_output.append("\r\nbluetooth connection started!");
                 break;
             case R.id.DeviceButtonSendMessage:
-                Console_output.append("\r\nSending message: B");
-                String Text = "B";
+
+                String Text = Message.getText().toString();
+                //Console_output.append("\r\nSending message: " + Text);
                 byte[] bytes = Text.getBytes(Charset.defaultCharset());
 
                 //tringBuilder SB = new StringBuilder();

@@ -35,7 +35,7 @@
     </style>
     <!-- ROBOTO styles -->
     <style name="ROBOTO_Regular">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
@@ -43,7 +43,7 @@
     </style>
 
     <style name="ROBOTO_Italic">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">14sp</item>
@@ -51,93 +51,99 @@
 
 
     <style name="ROBOTO_Bold">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Bold_Italic">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold|italic</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Light">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Light_Italic">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Thin">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-thin</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Thin_Italic">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-thin</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Condensed_Regular">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Condensed_italic">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Condensed_bold">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Condensed_bold_italic">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textStyle">bold|italic</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Medium">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Medium_italic">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="ROBOTO_Black">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:fontFamily">sans-serif-black</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="SwitchCompatStyle">
+        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="android:trackTint">@color/switch_color</item>
+
     </style>
 </resources>

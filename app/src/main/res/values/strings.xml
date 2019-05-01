@@ -26,5 +26,7 @@
     <string name="pair">Pair</string>
     <string name="unpair">Un-Pair</string>
     <string name="bluetoothaction4">Send message</string>
+    <string name="logo">Logo</string>
+    <string name="Message_hint">R, G, B, A or N</string>
 
 </resources>

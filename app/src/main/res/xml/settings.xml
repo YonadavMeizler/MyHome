@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="User Settings">
+        <com.imq.myhome.Objects.EditTextPreference
+            android:icon="@drawable/ic_person"
+            android:key="user_name_first"
+            android:singleLine="true"
+            android:title="First User Name" />
+
+        <com.imq.myhome.Objects.EditTextPreference
+            android:icon="@drawable/ic_person"
+            android:key="user_name_last"
+            android:singleLine="true"
+            android:title="Last User Name" />
+
+        <ListPreference
+            android:entries="@array/user_honorifics_values"
+            android:entryValues="@array/user_honorifics"
+            android:icon="@drawable/ic_person"
+            android:key="user_honorifics"
+            android:summary="Honorifics: %s"
+            android:title="User honorifics" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_mic"
+            android:key="Speech_guidence"
+            android:summary="Enable/Disable speech"
+            android:title="Speech" />
+
+        <ListPreference
+            android:entries="@array/Language_values"
+            android:entryValues="@array/Languages"
+            android:icon="@drawable/ic_language"
+            android:key="Speech_Language"
+            android:summary="Language: %s"
+            android:title="Speech Language" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

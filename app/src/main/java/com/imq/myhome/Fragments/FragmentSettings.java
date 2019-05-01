@@ -1,11 +1,13 @@
 package com.imq.myhome.Fragments;
 
-import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
-public class FragmentSettings extends Fragment {
+import com.imq.myhome.R;
 
-    private static final String TAG = "R2Y2";
-
-    public FragmentSettings() {
+public class FragmentSettings extends PreferenceFragmentCompat {
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.settings, rootKey);
     }
 }

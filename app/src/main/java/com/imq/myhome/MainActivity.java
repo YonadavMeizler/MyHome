@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "R2Y2";
     private static final int REQUEST_ENABLE_BT = 201;
 
+
     private Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private boolean isOpen = false;
     private FloatingActionButton fab_menu, fab_settings, fab_devices, fab_enable_disable_bluetooth, fab_scan;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final BroadcastReceiver mBluetoothStateReciver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+            if (action != null && action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
                 BTAux.get_state(state);
             }
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final BroadcastReceiver mBluetoothScanMode = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)) {
+            if (action != null && action.equals(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED)) {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, BluetoothAdapter.ERROR);
                 BTAux.get_scan_mode(state);
             }
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "Application started!");
 
 
         fab_menu = findViewById(R.id.fab_menu);
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
+
         fabOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(this, R.anim.fab_close);
 
@@ -91,11 +92,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab_enable_disable_bluetooth.setOnClickListener(this);
         fab_scan.setOnClickListener(this);
 
+        IntentFilter BTIntent1 = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        registerReceiver(mBluetoothStateReciver, BTIntent1);
+        IntentFilter BTIntent2 = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        registerReceiver(mBluetoothScanMode, BTIntent2);
+
         FragmentDevicesList MainFragment = new FragmentDevicesList();
         MainFragment.setOnFragmentListener(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, MainFragment).commit();
 
     }
+
 
     @Override
     protected void onDestroy() {
@@ -185,15 +192,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!bluetoothAdapter.isEnabled()) {
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-                    IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-                    registerReceiver(mBluetoothStateReciver, BTIntent);
                     fab_enable_disable_bluetooth.setImageResource(R.drawable.ic_bluetooth);
-
                 } else {
                     bluetoothAdapter.disable();
-
-                    IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-                    registerReceiver(mBluetoothStateReciver, BTIntent);
                     fab_enable_disable_bluetooth.setImageResource(R.drawable.ic_bluetooth_disabled);
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment, DevicesFragment).addToBackStack(null).commit();
@@ -208,8 +209,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, BluetoothAdapter.ERROR);
                 startActivityForResult(discoverableIntent, REQUEST_ENABLE_BT);
 
-                IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
-                registerReceiver(mBluetoothScanMode, BTIntent);
                 animateFab();
                 Log.d(TAG, "Making device discoverable for 120 second");
 

@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class AuxiliaryGeneral {
@@ -22,10 +23,6 @@ public class AuxiliaryGeneral {
     public AuxiliaryGeneral(Context context) {
         this.mContext = context;
         this.shared_preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-    }
-
-    public boolean isVoiceEnable() {
-        return shared_preferences.getBoolean("Speech_guidence", true);
     }
 
     public String Name(int type) {
@@ -76,5 +73,64 @@ public class AuxiliaryGeneral {
             greeting = "Good Morning";
         }
         return greeting;
+    }
+
+    public Locale getLocal() {
+        String local = Objects.requireNonNull(shared_preferences.getString("Speech_Language", "Locale.CANADA"));
+        switch (local) {
+            case "Locale.CANADA":
+                return Locale.CANADA;
+            case "Locale.CANADA_FRENCH":
+                return Locale.CANADA_FRENCH;
+            case "Locale.CHINA":
+                return Locale.CHINA;
+            case "Locale.CHINESE":
+                return Locale.CHINESE;
+            case "Locale.ENGLISH":
+                return Locale.ENGLISH;
+            case "Locale.FRANCE":
+                return Locale.FRANCE;
+            case "Locale.FRENCH":
+                return Locale.FRENCH;
+            case "Locale.GERMAN":
+                return Locale.GERMAN;
+            case "Locale.GERMANY":
+                return Locale.GERMANY;
+            case "Locale.ITALIAN":
+                return Locale.ITALIAN;
+            case "Locale.JAPAN":
+                return Locale.JAPAN;
+            case "Locale.JAPANESE":
+                return Locale.JAPANESE;
+            case "Locale.KOREA":
+                return Locale.KOREA;
+            case "Locale.KOREAN":
+                return Locale.KOREAN;
+            case "Locale.PRC":
+                return Locale.PRC;
+            case "Locale.ROOT":
+                return Locale.ROOT;
+            case "Locale.SIMPLIFIED_CHINESE":
+                return Locale.SIMPLIFIED_CHINESE;
+            case "Locale.TAIWAN":
+                return Locale.TAIWAN;
+            case "Locale.TRADITIONAL_CHINESE":
+                return Locale.TRADITIONAL_CHINESE;
+            case "Locale.UK":
+                return Locale.UK;
+            case "Locale.US":
+                return Locale.US;
+            default:
+                return Locale.CANADA;
+        }
+    }
+
+    public float getSpeechRate() {
+        String Speech_Rate = Objects.requireNonNull(shared_preferences.getString("Speech_Rate", "1.1f"));
+        return Float.valueOf(Speech_Rate);
+    }
+
+    public boolean isVoiceEnable() {
+        return shared_preferences.getBoolean("Speech_guidence", true);
     }
 }

@@ -23,51 +23,29 @@
         <item>Lady</item>
         <item>Lord</item>
     </string-array>
+
     <string-array name="Languages">
         <item>Locale.CANADA</item>
-        <item>Locale.CANADA_FRENCH</item>
-        <item>Locale.CHINA</item>
         <item>Locale.CHINESE</item>
         <item>Locale.ENGLISH</item>
-        <item>Locale.FRANCE</item>
         <item>Locale.FRENCH</item>
         <item>Locale.GERMAN</item>
-        <item>Locale.GERMANY</item>
         <item>Locale.ITALIAN</item>
-        <item>Locale.JAPAN</item>
         <item>Locale.JAPANESE</item>
-        <item>Locale.KOREA</item>
         <item>Locale.KOREAN</item>
-        <item>Locale.PRC</item>
-        <item>Locale.ROOT</item>
-        <item>Locale.SIMPLIFIED_CHINESE</item>
         <item>Locale.TAIWAN</item>
-        <item>Locale.TRADITIONAL_CHINESE</item>
-        <item>Locale.UK</item>
-        <item>Locale.US</item>
     </string-array>
+
     <string-array name="Language_values">
         <item>CANADA</item>
-        <item>CANADA FRENCH</item>
-        <item>CHINA</item>
         <item>CHINESE</item>
         <item>ENGLISH</item>
-        <item>FRANCE</item>
         <item>FRENCH</item>
         <item>GERMAN</item>
-        <item>GERMANY</item>
         <item>ITALIAN</item>
-        <item>JAPAN</item>
         <item>JAPANESE</item>
-        <item>KOREA</item>
         <item>KOREAN</item>
-        <item>PRC</item>
-        <item>ROOT</item>
-        <item>SIMPLIFIED CHINESE</item>
         <item>TAIWAN</item>
-        <item>TRADITIONAL CHINESE</item>
-        <item>UK</item>
-        <item>US</item>
     </string-array>
 
 

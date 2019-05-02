@@ -34,6 +34,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.imq.myhome.SplashActivity" />
         </activity>
+
+        <service
+            android:name=".Services.ServiceTTS"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="InnerclassSeparator" />
     </application>
 
 </manifest>

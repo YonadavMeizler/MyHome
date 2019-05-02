@@ -21,7 +21,12 @@
             android:summary="Honorifics: %s"
             android:title="User honorifics" />
 
-        <CheckBoxPreference
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="Voice Settings">
+
+        <SwitchPreference
             android:defaultValue="true"
             android:icon="@drawable/ic_mic"
             android:key="Speech_guidence"
@@ -35,6 +40,18 @@
             android:key="Speech_Language"
             android:summary="Language: %s"
             android:title="Speech Language" />
+
+        <com.imq.myhome.Objects.EditTextPreference
+            android:icon="@drawable/ic_equalizer"
+            android:key="Speech_Rate"
+            android:singleLine="true"
+            android:title="Speech Rate" />
+
+        <Preference
+            android:icon="@drawable/ic_check"
+            android:key="Speech_test"
+            android:summary="Testing speech preference"
+            android:title="Speech" />
 
     </PreferenceCategory>
 

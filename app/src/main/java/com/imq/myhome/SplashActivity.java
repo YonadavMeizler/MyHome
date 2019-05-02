@@ -28,7 +28,6 @@ import com.imq.myhome.Auxiliary.AuxiliaryBluetooth;
 import com.imq.myhome.Auxiliary.AuxiliaryGeneral;
 
 import java.util.List;
-import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
@@ -39,6 +38,9 @@ public class SplashActivity extends AppCompatActivity implements CompoundButton.
     private ImageView logo;
     private TextView user_Name;
     private AuxiliaryBluetooth BTAux = new AuxiliaryBluetooth();
+    private AuxiliaryGeneral GAux;
+    private TextToSpeech mTts;
+
     private final BroadcastReceiver mBluetoothStateReciver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -50,8 +52,7 @@ public class SplashActivity extends AppCompatActivity implements CompoundButton.
             }
         }
     };
-    private AuxiliaryGeneral GAux;
-    private TextToSpeech mTts;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,7 @@ public class SplashActivity extends AppCompatActivity implements CompoundButton.
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
-                    mTts.setLanguage(Locale.CANADA);
+                    mTts.setLanguage(GAux.getLocal());
                     mTts.setPitch(1.1f);
                 }
             }
